@@ -14,11 +14,11 @@
 
 ## 录屏展示
 
-![](/blob/master/preview_1.gif)
+![](https://github.com/AriesHoo/FastLib/blob/master/screenshot/preview_1.gif)
 
-![](/blob/master/preview_2.gif)
+![](https://github.com/AriesHoo/FastLib/blob/master/screenshot/preview_2.gif)
 
-![](/blob/master/preview_3.gif)
+![](https://github.com/AriesHoo/FastLib/blob/master/screenshot/preview_3.gif)
 
 
 ## Gradle

@@ -14,11 +14,11 @@
 
 ## 录屏展示
 
-![](https://github.com/AriesHoo/FastLib/blob/master/screenshot/preview_1.gif)
+![](https://github.com/AriesHoo/TabLayout/blob/master/screenshot/preview_1.gif)
 
-![](https://github.com/AriesHoo/FastLib/blob/master/screenshot/preview_2.gif)
+![](https://github.com/AriesHoo/TabLayout/blob/master/screenshot/preview_2.gif)
 
-![](https://github.com/AriesHoo/FastLib/blob/master/screenshot/preview_3.gif)
+![](https://github.com/AriesHoo/TabLayout/blob/master/screenshot/preview_3.gif)
 
 
 ## Gradle
@@ -54,8 +54,10 @@ dependencies{
 | tl_tab_padding |dimension| 设置tab的paddingLeft和paddingRight
 | tl_tab_space_equal |boolean| 设置tab大小等分
 | tl_tab_width |dimension| 设置tab固定大小
+| ~~tl_textsize~~ |~~dimension~~| ~~设置字体大小~~
 | tl_textSize |dimension| 设置字体大小
 | tl_textSelectColor |color| 设置字体选中颜色
+| ~~tl_textUnselectColor~~ |~~color~~| ~~设置字体未选中颜色~~
 | tl_textUnSelectColor |color| 设置字体未选中颜色
 | tl_textBold |boolean| 设置字体加粗
 | tl_iconWidth |dimension| 设置icon宽度(仅支持CommonTabLayout)

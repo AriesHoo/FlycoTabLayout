@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <com.flyco.tablayout.CommonTabLayout
+        <com.aries.ui.view.tab.CommonTabLayout
             android:id="@+id/tl_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -20,7 +20,7 @@
             android:paddingTop="5dp"
             tl:tl_indicator_color="#2C97DE"
             tl:tl_textSelectColor="#2C97DE"
-            tl:tl_textUnselectColor="#66000000"
+            tl:tl_textUnSelectColor="#66000000"
             tl:tl_underline_color="#DDDDDD"
             tl:tl_underline_height="1dp"/>
 
@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="84dp"/>
 
-        <com.flyco.tablayout.CommonTabLayout
+        <com.aries.ui.view.tab.CommonTabLayout
             android:id="@+id/tl_2"
             android:layout_width="match_parent"
             android:layout_height="54dp"
@@ -39,8 +39,8 @@
             tl:tl_indicator_color="#2C97DE"
             tl:tl_indicator_height="0dp"
             tl:tl_textSelectColor="#2C97DE"
-            tl:tl_textUnselectColor="#66000000"
-            tl:tl_textsize="12sp"
+            tl:tl_textUnSelectColor="#66000000"
+            tl:tl_textSize="12sp"
             tl:tl_underline_color="#DDDDDD"
             tl:tl_underline_height="1dp"/>
 
@@ -50,7 +50,7 @@
             android:layout_height="84dp">
         </FrameLayout>
 
-        <com.flyco.tablayout.CommonTabLayout
+        <com.aries.ui.view.tab.CommonTabLayout
             android:id="@+id/tl_3"
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -63,13 +63,13 @@
             tl:tl_indicator_color="#2C97DE"
             tl:tl_indicator_gravity="TOP"
             tl:tl_textSelectColor="#2C97DE"
-            tl:tl_textUnselectColor="#66000000"
-            tl:tl_textsize="15sp"
+            tl:tl_textUnSelectColor="#66000000"
+            tl:tl_textSize="15sp"
             tl:tl_underline_color="#DDDDDD"
             tl:tl_underline_gravity="TOP"
             tl:tl_underline_height="1dp"/>
 
-        <com.flyco.tablayout.CommonTabLayout
+        <com.aries.ui.view.tab.CommonTabLayout
             android:id="@+id/tl_4"
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -77,9 +77,9 @@
             tl:tl_iconVisible="false"
             tl:tl_textBold="SELECT"
             tl:tl_indicator_width="10dp"
-            tl:tl_textsize="14sp"/>
+            tl:tl_textSize="14sp"/>
 
-        <com.flyco.tablayout.CommonTabLayout
+        <com.aries.ui.view.tab.CommonTabLayout
             tl:tl_textBold="BOTH"
             android:id="@+id/tl_5"
             android:layout_width="match_parent"
@@ -89,9 +89,9 @@
             tl:tl_indicator_corner_radius="2dp"
             tl:tl_indicator_height="4dp"
             tl:tl_indicator_width="4dp"
-            tl:tl_textsize="14sp"/>
+            tl:tl_textSize="14sp"/>
 
-        <com.flyco.tablayout.CommonTabLayout
+        <com.aries.ui.view.tab.CommonTabLayout
             android:id="@+id/tl_6"
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -100,9 +100,9 @@
             tl:tl_indicator_corner_radius="1.5dp"
             tl:tl_indicator_height="3dp"
             tl:tl_indicator_width="10dp"
-            tl:tl_textsize="14sp"/>
+            tl:tl_textSize="14sp"/>
 
-        <com.flyco.tablayout.CommonTabLayout
+        <com.aries.ui.view.tab.CommonTabLayout
             android:id="@+id/tl_7"
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -113,9 +113,9 @@
             tl:tl_indicator_height="3dp"
             tl:tl_indicator_style="TRIANGLE"
             tl:tl_indicator_width="10dp"
-            tl:tl_textsize="14sp"/>
+            tl:tl_textSize="14sp"/>
 
-        <com.flyco.tablayout.CommonTabLayout
+        <com.aries.ui.view.tab.CommonTabLayout
             android:id="@+id/tl_8"
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -126,6 +126,6 @@
             tl:tl_indicator_margin_left="5dp"
             tl:tl_indicator_margin_right="5dp"
             tl:tl_indicator_style="BLOCK"
-            tl:tl_textsize="14sp"/>
+            tl:tl_textSize="14sp"/>
     </LinearLayout>
 </ScrollView>

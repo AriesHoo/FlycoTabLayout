@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <com.flyco.tablayout.SegmentTabLayout
+        <com.aries.ui.view.tab.SegmentTabLayout
             android:id="@+id/tl_1"
             android:layout_width="wrap_content"
             android:layout_height="32dp"
@@ -22,7 +22,7 @@
             tl:tl_indicator_corner_radius="8dp"
             tl:tl_tab_padding="20dp"/>
 
-        <com.flyco.tablayout.SegmentTabLayout
+        <com.aries.ui.view.tab.SegmentTabLayout
             android:id="@+id/tl_2"
             android:layout_width="wrap_content"
             android:layout_height="36dp"
@@ -35,7 +35,7 @@
             tl:tl_indicator_color="#009688"
             tl:tl_tab_padding="20dp"/>
 
-        <com.flyco.tablayout.SegmentTabLayout
+        <com.aries.ui.view.tab.SegmentTabLayout
             android:id="@+id/tl_3"
             android:layout_width="match_parent"
             android:layout_height="36dp"
@@ -56,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="84dp"/>
 
-        <com.flyco.tablayout.SegmentTabLayout
+        <com.aries.ui.view.tab.SegmentTabLayout
             android:id="@+id/tl_4"
             android:layout_width="wrap_content"
             android:layout_height="36dp"
@@ -77,7 +77,7 @@
             android:layout_width="match_parent"
             android:layout_height="84dp"/>
 
-        <com.flyco.tablayout.SegmentTabLayout
+        <com.aries.ui.view.tab.SegmentTabLayout
             android:id="@+id/tl_5"
             android:layout_width="match_parent"
             android:layout_height="36dp"

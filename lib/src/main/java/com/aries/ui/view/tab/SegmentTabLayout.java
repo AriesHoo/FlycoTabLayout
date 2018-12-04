@@ -356,7 +356,12 @@ public class SegmentTabLayout extends FrameLayout implements ValueAnimator.Anima
 
     }
 
-    //setter and getter
+    /**
+     * 设置选中tab
+     *
+     * @param currentTab
+     * @return
+     */
     public SegmentTabLayout setCurrentTab(int currentTab) {
         mLastTab = this.mCurrentTab;
         this.mCurrentTab = currentTab;
@@ -488,8 +493,9 @@ public class SegmentTabLayout extends FrameLayout implements ValueAnimator.Anima
 
     private OnTabSelectListener mListener;
 
-    public void setOnTabSelectListener(OnTabSelectListener listener) {
+    public SegmentTabLayout setOnTabSelectListener(OnTabSelectListener listener) {
         this.mListener = listener;
+        return this;
     }
 
     @Override

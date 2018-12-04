@@ -39,6 +39,7 @@ import java.util.Collections;
  * @Function: 滑动TabLayout, 对于ViewPager的依赖性强
  * @Description: 1、2018年11月30日11:18:41 修改原库 https://github.com/H07000223/FlycoTabLayout 选中粗体当初始化选中第一项不生效BUG
  * {@link #updateTabStyles()}
+ * 2、2018-12-4 14:12:34 新增部分设置方法返回值方便链式调用;删除原库相应xml属性 set/get方法
  */
 public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.OnPageChangeListener, ITabLayout {
     private TabSlidingDelegate mDelegate;
@@ -186,7 +187,7 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
         updateTabStyles();
     }
 
-    public void addNewTab(String title) {
+    public SlidingTabLayout addNewTab(String title) {
         View tabView = View.inflate(mContext, R.layout.layout_tab, null);
         if (mTitles != null) {
             mTitles.add(title);
@@ -197,6 +198,7 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
         this.mTabCount = mTitles == null ? mViewPager.getAdapter().getCount() : mTitles.size();
 
         updateTabStyles();
+        return this;
     }
 
     /**
@@ -475,143 +477,22 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
         }
     }
 
-    //setter and getter
-    public void setCurrentTab(int currentTab) {
+    public SlidingTabLayout setCurrentTab(int currentTab) {
         this.mCurrentTab = currentTab;
         mViewPager.setCurrentItem(currentTab);
-
+        return this;
     }
 
-    public void setCurrentTab(int currentTab, boolean smoothScroll) {
+    public SlidingTabLayout setCurrentTab(int currentTab, boolean smoothScroll) {
         this.mCurrentTab = currentTab;
         mViewPager.setCurrentItem(currentTab, smoothScroll);
+        return this;
     }
 
-//    public void setIndicatorStyle(int indicatorStyle) {
-//        this.mIndicatorStyle = indicatorStyle;
-//        invalidate();
-//    }
-//
-//    public void setTabPadding(float tabPadding) {
-//        this.mTabPadding = dp2px(tabPadding);
-//        updateTabStyles();
-//    }
-//
-//    public void setTabSpaceEqual(boolean tabSpaceEqual) {
-//        this.mTabSpaceEqual = tabSpaceEqual;
-//        updateTabStyles();
-//    }
-//
-//    public void setTabWidth(float tabWidth) {
-//        this.mTabWidth = dp2px(tabWidth);
-//        updateTabStyles();
-//    }
-//
-//    public void setIndicatorColor(int indicatorColor) {
-//        this.mIndicatorColor = indicatorColor;
-//        invalidate();
-//    }
-//
-//    public void setIndicatorHeight(float indicatorHeight) {
-//        this.mIndicatorHeight = dp2px(indicatorHeight);
-//        invalidate();
-//    }
-//
-//    public void setIndicatorWidth(float indicatorWidth) {
-//        this.mIndicatorWidth = dp2px(indicatorWidth);
-//        invalidate();
-//    }
-//
-//    public void setIndicatorCornerRadius(float indicatorCornerRadius) {
-//        this.mIndicatorCornerRadius = dp2px(indicatorCornerRadius);
-//        invalidate();
-//    }
-//
-//    public void setIndicatorGravity(int indicatorGravity) {
-//        this.mIndicatorGravity = indicatorGravity;
-//        invalidate();
-//    }
-//
-//    public void setIndicatorMargin(float indicatorMarginLeft, float indicatorMarginTop,
-//                                   float indicatorMarginRight, float indicatorMarginBottom) {
-//        this.mIndicatorMarginLeft = dp2px(indicatorMarginLeft);
-//        this.mIndicatorMarginTop = dp2px(indicatorMarginTop);
-//        this.mIndicatorMarginRight = dp2px(indicatorMarginRight);
-//        this.mIndicatorMarginBottom = dp2px(indicatorMarginBottom);
-//        invalidate();
-//    }
-//
-//    public void setIndicatorWidthEqualTitle(boolean indicatorWidthEqualTitle) {
-//        this.mIndicatorWidthEqualTitle = indicatorWidthEqualTitle;
-//        invalidate();
-//    }
-//
-//    public void setUnderlineColor(int underlineColor) {
-//        this.mUnderlineColor = underlineColor;
-//        invalidate();
-//    }
-//
-//    public void setUnderlineHeight(float underlineHeight) {
-//        this.mUnderlineHeight = dp2px(underlineHeight);
-//        invalidate();
-//    }
-//
-//    public void setUnderlineGravity(int underlineGravity) {
-//        this.mUnderlineGravity = underlineGravity;
-//        invalidate();
-//    }
-//
-//    public void setDividerColor(int dividerColor) {
-//        this.mDividerColor = dividerColor;
-//        invalidate();
-//    }
-//
-//    public void setDividerWidth(float dividerWidth) {
-//        this.mDividerWidth = dp2px(dividerWidth);
-//        invalidate();
-//    }
-//
-//    public void setDividerPadding(float dividerPadding) {
-//        this.mDividerPadding = dp2px(dividerPadding);
-//        invalidate();
-//    }
-
-//    public void setTextSize(float textSize) {
-//        this.mTextSize = sp2px(textSize);
-//        updateTabStyles();
-//    }
-//
-//    public void setTextSelectColor(int textSelectColor) {
-//        this.mTextSelectColor = textSelectColor;
-//        updateTabStyles();
-//    }
-//
-//    public void setTextUnselectColor(int textUnselectColor) {
-//        this.mTextUnselectColor = textUnselectColor;
-//        updateTabStyles();
-//    }
-//
-//    /**
-//     * 新增方法
-//     *
-//     * @param textBold
-//     * @return
-//     */
-//    public SlidingTabLayout setTextBold(TextBold textBold) {
-//        this.mTextBold = textBold;
-//        updateTabStyles();
-//        return this;
-//    }
-//
-//    public void setTextAllCaps(boolean textAllCaps) {
-//        this.mTextAllCaps = textAllCaps;
-//        updateTabStyles();
-//    }
-
-    public void setSnapOnTabClick(boolean snapOnTabClick) {
+    public SlidingTabLayout setSnapOnTabClick(boolean snapOnTabClick) {
         mSnapOnTabClick = snapOnTabClick;
+        return this;
     }
-
 
     public int getTabCount() {
         return mTabCount;
@@ -621,104 +502,12 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
         return mCurrentTab;
     }
 
-//    public int getIndicatorStyle() {
-//        return mIndicatorStyle;
-//    }
-//
-//    public float getTabPadding() {
-//        return mTabPadding;
-//    }
-//
-//    public boolean isTabSpaceEqual() {
-//        return mTabSpaceEqual;
-//    }
-//
-//    public float getTabWidth() {
-//        return mTabWidth;
-//    }
-//
-//    public int getIndicatorColor() {
-//        return mIndicatorColor;
-//    }
-//
-//    public float getIndicatorHeight() {
-//        return mIndicatorHeight;
-//    }
-//
-//    public float getIndicatorWidth() {
-//        return mIndicatorWidth;
-//    }
-//
-//    public float getIndicatorCornerRadius() {
-//        return mIndicatorCornerRadius;
-//    }
-//
-//    public float getIndicatorMarginLeft() {
-//        return mIndicatorMarginLeft;
-//    }
-//
-//    public float getIndicatorMarginTop() {
-//        return mIndicatorMarginTop;
-//    }
-//
-//    public float getIndicatorMarginRight() {
-//        return mIndicatorMarginRight;
-//    }
-//
-//    public float getIndicatorMarginBottom() {
-//        return mIndicatorMarginBottom;
-//    }
-//
-//    public int getUnderlineColor() {
-//        return mUnderlineColor;
-//    }
-//
-//    public float getUnderlineHeight() {
-//        return mUnderlineHeight;
-//    }
-//
-//    public int getDividerColor() {
-//        return mDividerColor;
-//    }
-//
-//    public float getDividerWidth() {
-//        return mDividerWidth;
-//    }
-//
-//    public float getDividerPadding() {
-//        return mDividerPadding;
-//    }
-
-//    public float getTextsize() {
-//        return mTextSize;
-//    }
-//
-//    public int getTextSelectColor() {
-//        return mTextSelectColor;
-//    }
-//
-//    public int getTextUnselectColor() {
-//        return mTextUnselectColor;
-//    }
-//
-//    public TextBold getTextBold() {
-//        return mTextBold;
-//    }
-//
-//
-//    public boolean isTextAllCaps() {
-//        return mTextAllCaps;
-//    }
-
     public TextView getTitleView(int tab) {
         View tabView = mTabsContainer.getChildAt(tab);
         TextView tv_tab_title = (TextView) tabView.findViewById(R.id.tv_tab_title);
         return tv_tab_title;
     }
 
-    //setter and getter
-
-    // show MsgTipView
     private Paint mTextPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private SparseArray<Boolean> mInitSetMap = new SparseArray<>();
 
@@ -757,7 +546,7 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
         if (position >= mTabCount) {
             position = mTabCount - 1;
         }
-       return showMsg(position, 0);
+        return showMsg(position, 0);
     }
 
     /**
@@ -817,8 +606,9 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
 
     private OnTabSelectListener mListener;
 
-    public void setOnTabSelectListener(OnTabSelectListener listener) {
+    public SlidingTabLayout setOnTabSelectListener(OnTabSelectListener listener) {
         this.mListener = listener;
+        return this;
     }
 
     class InnerPagerAdapter extends FragmentPagerAdapter {

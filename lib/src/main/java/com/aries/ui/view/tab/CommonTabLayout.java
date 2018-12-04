@@ -371,8 +371,8 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
                 }
 
                 mIndicatorDrawable.setColor(getDelegate().getIndicatorColor());
-                mIndicatorDrawable.setBounds(paddingLeft + (int) getDelegate().getIndicatorMarginLeft() + mIndicatorRect.left,
-                        (int) getDelegate().getIndicatorMarginTop(), (int) (paddingLeft + mIndicatorRect.right - getDelegate().getIndicatorMarginRight()),
+                mIndicatorDrawable.setBounds(paddingLeft + getDelegate().getIndicatorMarginLeft() + mIndicatorRect.left,
+                        getDelegate().getIndicatorMarginTop(), (paddingLeft + mIndicatorRect.right - getDelegate().getIndicatorMarginRight()),
                         (int) (getDelegate().getIndicatorMarginTop() + getDelegate().getIndicatorHeight()));
                 mIndicatorDrawable.setCornerRadius(getDelegate().getIndicatorCornerRadius());
                 mIndicatorDrawable.draw(canvas);
@@ -437,8 +437,6 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
         TextView tv_tab_title = tabView.findViewById(R.id.tv_tab_title);
         return tv_tab_title;
     }
-
-    //setter and getter
 
     /**
      * show MsgTipView

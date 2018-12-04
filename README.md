@@ -6,7 +6,7 @@
 [![](https://img.shields.io/github/release/AriesHoo/TabLayout.svg)](https://github.com/AriesHoo/TabLayout/releases)
 [![API](https://img.shields.io/badge/API-14%2B-green.svg?style=flat)](https://android-arsenal.com/api?level=14)
 [![](https://img.shields.io/badge/简书-AriesHoo-blue.svg)](http://www.jianshu.com/u/a229eee96115)
-[![](https://img.shields.io/badge/Fork From-FlycoTabLayoutV2.1.2-green.svg)](https://github.com/H07000223/FlycoTabLayout)
+[![](https://img.shields.io/badge/Forked-FlycoTabLayoutV2.1.2-green.svg)](https://github.com/H07000223/FlycoTabLayout)
 
 [[Download]](https://raw.githubusercontent.com/AriesHoo/TabLayout/master/apk/sample.apk)
 

@@ -23,11 +23,13 @@
 
 ## Gradle
 
+[![](https://jitpack.io/v/AriesHoo/TabLayout.svg)](https://jitpack.io/#AriesHoo/TabLayout)
+
 ```groovy
 dependencies{
     compile 'com.android.support:support-v4:28.0.0'
     implementation 'com.github.AriesHoo:TabLayout:${LATEST_VERSION}'
-    //implementation 'com.github.AriesHoo:TabLayout:1.0.0'
+    //implementation 'com.github.AriesHoo:TabLayout:1.0.1'
 }
 ```
 

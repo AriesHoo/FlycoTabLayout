@@ -1,4 +1,4 @@
-# TabLayout  FlycoTabLayout 2.1.2版本基础上修改库
+# TabLayout快速创建Tab库-FlycoTabLayout 2.1.2版本基础上修改库
 --------------------------
 
 [![](https://img.shields.io/badge/download-demo-blue.svg)](https://raw.githubusercontent.com/AriesHoo/TabLayout/master/apk/sample.apk)

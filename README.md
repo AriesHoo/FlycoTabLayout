@@ -1,4 +1,4 @@
-# TabLayout-FlycoTabLayout 2.1.2版本基础上修改的快速创建Tab库
+# TabLayout-FlycoTabLayout 2.1.2版本基础上优化修改的快速创建Tab库
 --------------------------
 
 [![](https://img.shields.io/badge/download-demo-blue.svg)](https://raw.githubusercontent.com/AriesHoo/TabLayout/master/apk/sample.apk)

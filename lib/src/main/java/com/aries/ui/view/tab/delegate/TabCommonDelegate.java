@@ -27,6 +27,7 @@ public class TabCommonDelegate extends TabCommonSlidingDelegate<TabCommonDelegat
 
     public TabCommonDelegate(View view, AttributeSet attrs, ITabLayout iTabLayout) {
         super(view, attrs, iTabLayout);
+
         mIndicatorAnimEnable = mTypedArray.getBoolean(R.styleable.TabLayout_tl_indicator_anim_enable, true);
         mIndicatorBounceEnable = mTypedArray.getBoolean(R.styleable.TabLayout_tl_indicator_bounce_enable, true);
         mIndicatorAnimDuration = mTypedArray.getInt(R.styleable.TabLayout_tl_indicator_anim_duration, -1);
@@ -36,6 +37,7 @@ public class TabCommonDelegate extends TabCommonSlidingDelegate<TabCommonDelegat
         mIconWidth = mTypedArray.getDimensionPixelSize(R.styleable.TabLayout_tl_iconWidth, dp2px(0));
         mIconHeight = mTypedArray.getDimensionPixelSize(R.styleable.TabLayout_tl_iconHeight, dp2px(0));
         mIconMargin = mTypedArray.getDimensionPixelSize(R.styleable.TabLayout_tl_iconMargin, dp2px(2.5f));
+
     }
 
 

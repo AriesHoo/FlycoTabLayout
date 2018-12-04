@@ -18,6 +18,9 @@ public class TabSlidingDelegate extends TabCommonSlidingDelegate<TabSlidingDeleg
 
     public TabSlidingDelegate(View view, AttributeSet attrs, ITabLayout iTabLayout) {
         super(view, attrs, iTabLayout);
+        mTabSpaceEqual = mTypedArray.getBoolean(R.styleable.TabLayout_tl_tab_space_equal, false);
+
+        mTabPadding = mTypedArray.getDimension(R.styleable.TabLayout_tl_tab_padding, mTabSpaceEqual || mTabWidth > 0 ? dp2px(0) : dp2px(20));
         mIndicatorWidthEqualTitle = mTypedArray.getBoolean(R.styleable.TabLayout_tl_indicator_width_equal_title, false);
     }
 

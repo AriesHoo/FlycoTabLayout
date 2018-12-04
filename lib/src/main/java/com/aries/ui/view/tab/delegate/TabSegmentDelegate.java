@@ -1,6 +1,7 @@
 package com.aries.ui.view.tab.delegate;
 
 import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -25,16 +26,23 @@ public class TabSegmentDelegate extends TabLayoutDelegate<TabSegmentDelegate> {
 
     public TabSegmentDelegate(View view, AttributeSet attrs, ITabLayout iTabLayout) {
         super(view, attrs, iTabLayout);
+        mIndicatorColor = mTypedArray.getColor(R.styleable.TabLayout_tl_indicator_color, Color.parseColor("#222831"));
         mIndicatorHeight = mTypedArray.getDimension(R.styleable.TabLayout_tl_indicator_height, -1);
         mIndicatorCornerRadius = mTypedArray.getDimension(R.styleable.TabLayout_tl_indicator_corner_radius, -1);
-        mTextUnSelectColor = mTypedArray.getColor(R.styleable.TabLayout_tl_textUnSelectColor, mIndicatorColor);
         mIndicatorAnimEnable = mTypedArray.getBoolean(R.styleable.TabLayout_tl_indicator_anim_enable, false);
         mIndicatorBounceEnable = mTypedArray.getBoolean(R.styleable.TabLayout_tl_indicator_bounce_enable, true);
         mIndicatorAnimDuration = mTypedArray.getInt(R.styleable.TabLayout_tl_indicator_anim_duration, -1);
 
+        mDividerColor = mTypedArray.getColor(R.styleable.TabLayout_tl_divider_color, mIndicatorColor);
+        mDividerWidth = mTypedArray.getDimension(R.styleable.TabLayout_tl_divider_width, dp2px(1));
+        mDividerPadding = mTypedArray.getDimension(R.styleable.TabLayout_tl_divider_padding, 0);
+
+        mTextUnSelectColor = mTypedArray.getColor(R.styleable.TabLayout_tl_textUnSelectColor, mIndicatorColor);
+
         mBarColor = mTypedArray.getColorStateList(R.styleable.TabLayout_tl_bar_color);
         mBarStrokeColor = mTypedArray.getColorStateList(R.styleable.TabLayout_tl_bar_stroke_color);
         mBarStrokeWidth = mTypedArray.getDimensionPixelSize(R.styleable.TabLayout_tl_bar_stroke_width, dp2px(1));
+        mBarColor = mBarColor == null ? ColorStateList.valueOf(Color.TRANSPARENT) : mBarColor;
         mBarStrokeColor = mBarStrokeColor == null ? ColorStateList.valueOf(mIndicatorColor) : mBarStrokeColor;
     }
 

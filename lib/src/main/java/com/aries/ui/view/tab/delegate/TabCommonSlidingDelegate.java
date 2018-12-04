@@ -13,26 +13,31 @@ import com.aries.ui.view.tab.listener.ITabLayout;
  * @Author: AriesHoo on 2018/11/30 16:59
  * @E-Mail: AriesHoo@126.com
  * @Function: {@link com.aries.ui.view.tab.CommonTabLayout}及{@link com.aries.ui.view.tab.SlidingTabLayout}共有属性及Java设置方法代理
- * @Description:
+ * @Description: 1、2018-12-4 13:41:55 将{@link com.aries.ui.view.tab.CommonTabLayout}及{@link com.aries.ui.view.tab.SlidingTabLayout}共有属性初始值进行调整
  */
 public class TabCommonSlidingDelegate<T extends TabCommonSlidingDelegate> extends TabLayoutDelegate<T> {
 
-    private int mIndicatorStyle;
-    private float mIndicatorWidth;
-    private int mIndicatorGravity;
+    protected int mIndicatorStyle;
+    protected float mIndicatorWidth;
+    protected int mIndicatorGravity;
 
     /**
      * underline
      */
-    private int mUnderlineColor;
-    private float mUnderlineHeight;
-    private int mUnderlineGravity;
+    protected int mUnderlineColor;
+    protected float mUnderlineHeight;
+    protected int mUnderlineGravity;
 
 
     public TabCommonSlidingDelegate(View view, AttributeSet attrs, ITabLayout iTabLayout) {
         super(view, attrs, iTabLayout);
         mIndicatorStyle = mTypedArray.getInt(R.styleable.TabLayout_tl_indicator_style, IndicatorStyle.NORMAL);
+        mIndicatorColor = mTypedArray.getColor(R.styleable.TabLayout_tl_indicator_color, Color.parseColor(mIndicatorStyle == IndicatorStyle.BLOCK ? "#4B6A87" : "#ffffff"));
+        mIndicatorHeight = mTypedArray.getDimension(R.styleable.TabLayout_tl_indicator_height, dp2px(mIndicatorStyle == IndicatorStyle.TRIANGLE ? 4 : (mIndicatorStyle == IndicatorStyle.BLOCK ? -1 : 2)));
         mIndicatorWidth = mTypedArray.getDimension(R.styleable.TabLayout_tl_indicator_width, dp2px(mIndicatorStyle == IndicatorStyle.TRIANGLE ? 10 : -1));
+        mIndicatorMarginTop = mTypedArray.getDimensionPixelSize(R.styleable.TabLayout_tl_indicator_margin_top, dp2px(mIndicatorStyle == IndicatorStyle.BLOCK ? 7 : 0));
+        mIndicatorMarginBottom = mTypedArray.getDimensionPixelSize(R.styleable.TabLayout_tl_indicator_margin_bottom, dp2px(mIndicatorStyle == IndicatorStyle.BLOCK ? 7 : 0));
+        mIndicatorCornerRadius = mTypedArray.getDimensionPixelSize(R.styleable.TabLayout_tl_indicator_corner_radius, dp2px(mIndicatorStyle == IndicatorStyle.BLOCK ? -1 : 0));
         mIndicatorGravity = mTypedArray.getInt(R.styleable.TabLayout_tl_indicator_gravity, Gravity.BOTTOM);
 
         mUnderlineColor = mTypedArray.getColor(R.styleable.TabLayout_tl_underline_color, Color.parseColor("#ffffff"));

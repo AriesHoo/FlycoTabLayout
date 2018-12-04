@@ -1,4 +1,4 @@
-# TabLayout  FlycoTabLayout V2.1.2 小修改版本，原库已太久没有更新,属性及方法做了一定修改，修复小部分BUG
+# TabLayout  FlycoTabLayout 2.1.2版本基础上修改库
 --------------------------
 
 [![](https://img.shields.io/badge/download-demo-blue.svg)](https://raw.githubusercontent.com/AriesHoo/TabLayout/master/apk/sample.apk)
@@ -33,7 +33,9 @@ dependencies{
 }
 ```
 
-## 自定义属性-修改了几个参数拼写
+## 自定义属性
+
+修改了几个参数拼写 删除线标识为原库属性,下一行为修改后属性
 
 |name|format|description|
 |:---:|:---:|:---:|
@@ -72,7 +74,9 @@ dependencies{
 | tl_indicator_bounce_enable |boolean| 设置显示器支持动画回弹效果(only for CommonTabLayout)
 | tl_indicator_width_equal_title |boolean| 设置显示器与标题一样长(only for SlidingTabLayout)
 
-## 自定义属性-java代码调用--仅自定义属性通过代理类设置其它如setCurrentTab 还是原来不变
+## 自定义属性java代码调用
+
+仅自定义属性通过代理类设置其它如setCurrentTab 还是原来调用模式不变
 
  tab.getDelegate()
     .setXXX()
@@ -93,6 +97,19 @@ dependencies{
                  //设置指示器高度为0
                  .setIndicatorHeight(0);
  ```
+ 
+ ## 重大更新日志 其它版本参看[Release](https://github.com/AriesHoo/TabLayout/releases)
+ 
+ * 1.0.1 更新
+ 
+   * 优化:将CommonTabLayout及SlidingTabLayout共有属性初始值进行调整;SegmentLayout初始属性进行调整
+ 
+ * 1.0.0 更新
+        
+	* 修改:修改库包名已区分原库
+    * 优化:将原xml自定义属性通过相应代理delegate解析并通过tab对象getDelegate设置各种自定义属性;链式调用各种属性
+    * 优化:将项目原属性命名单词不规范地方做小调整主要大小写问题;将原设置单位转换地方做调整优化尤其是文字字号及间距
+    * 修复:修复选中粗体初始化第一项不加粗BUG;修复已添加Fragment再次添加系统报错BUG
  
 ## 鸣谢
 

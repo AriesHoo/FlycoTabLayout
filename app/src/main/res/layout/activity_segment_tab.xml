@@ -20,7 +20,8 @@
             tl:tl_bar_color="#ffffff"
             tl:tl_indicator_color="#2C97DE"
             tl:tl_indicator_corner_radius="8dp"
-            tl:tl_tab_padding="20dp"/>
+            tl:tl_tab_padding="20dp"
+            tl:tl_textSelectSize="20dp"/>
 
         <com.aries.ui.view.tab.SegmentTabLayout
             android:id="@+id/tl_2"
@@ -51,7 +52,7 @@
             tl:tl_indicator_margin_top="2dp"
             tl:tl_textBold="SELECT"/>
 
-        <android.support.v4.view.ViewPager
+        <androidx.viewpager.widget.ViewPager
             android:id="@+id/vp_2"
             android:layout_width="match_parent"
             android:layout_height="84dp"/>

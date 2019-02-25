@@ -11,8 +11,6 @@ import android.graphics.Rect;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.util.AttributeSet;
 import android.util.SparseArray;
 import android.view.Gravity;
@@ -24,15 +22,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.aries.ui.view.tab.widget.MsgView;
 import com.aries.ui.view.tab.delegate.TabCommonDelegate;
 import com.aries.ui.view.tab.listener.CustomTabEntity;
 import com.aries.ui.view.tab.listener.ITabLayout;
 import com.aries.ui.view.tab.listener.OnTabSelectListener;
 import com.aries.ui.view.tab.utils.FragmentChangeManager;
 import com.aries.ui.view.tab.utils.UnreadMsgUtils;
+import com.aries.ui.view.tab.widget.MsgView;
 
 import java.util.ArrayList;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 /**
  * @Author: AriesHoo on 2018/11/30 9:48
@@ -41,8 +42,8 @@ import java.util.ArrayList;
  * @Description: 1、2018-11-30 09:48:45 修改原库在处理Activity状态回收后当前选中tab正确Fragment不正确问题{@link #onRestoreInstanceState(Parcelable)}
  * 2、2018-11-30 10:07:38 修改参数方法拼写错误及java方法废弃部分错误拼写
  * 3、2018-11-30 10:08:19 增加java方法回调值方便链式调用
- * 4、2018年11月30日11:18:41 修改原库 https://github.com/H07000223/FlycoTabLayout 选中粗体当初始化选中第一项不生效BUG
- * * {@link #updateTabStyles()}
+ * 4、2018-11-30 11:18:41 修改原库 https://github.com/H07000223/FlycoTabLayout 选中粗体当初始化选中第一项不生效BUG{@link #updateTabStyles()}
+ * 5、2018-12-13 09:40:51 新增选中文字字号设置 textSelectSize
  */
 public class CommonTabLayout extends FrameLayout implements ValueAnimator.AnimatorUpdateListener, ITabLayout {
     private TabCommonDelegate mDelegate;
@@ -198,7 +199,7 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
             tabView.setPadding((int) getDelegate().getTabPadding(), 0, (int) getDelegate().getTabPadding(), 0);
             TextView tv_tab_title = tabView.findViewById(R.id.tv_tab_title);
             tv_tab_title.setTextColor(i == mCurrentTab ? getDelegate().getTextSelectColor() : getDelegate().getTextUnSelectColor());
-            tv_tab_title.setTextSize(getDelegate().getTextSizeUnit(), getDelegate().getTextSize());
+            tv_tab_title.setTextSize(getDelegate().getTextSizeUnit(), mCurrentTab == i ? getDelegate().getTextSelectSize() : getDelegate().getTextSize());
             if (getDelegate().isTextAllCaps()) {
                 tv_tab_title.setText(tv_tab_title.getText().toString().toUpperCase());
             }
@@ -240,6 +241,7 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
             final boolean isSelect = i == position;
             TextView tab_title = tabView.findViewById(R.id.tv_tab_title);
             tab_title.setTextColor(isSelect ? getDelegate().getTextSelectColor() : getDelegate().getTextUnSelectColor());
+            tab_title.setTextSize(getDelegate().getTextSizeUnit(), isSelect? getDelegate().getTextSelectSize() : getDelegate().getTextSize());
             ImageView iv_tab_icon = tabView.findViewById(R.id.iv_tab_icon);
             CustomTabEntity tabEntity = mTabEntity.get(i);
             iv_tab_icon.setImageResource(isSelect ? tabEntity.getTabSelectedIcon() : tabEntity.getTabUnselectedIcon());

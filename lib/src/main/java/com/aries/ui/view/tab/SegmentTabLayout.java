@@ -10,8 +10,8 @@ import android.graphics.Rect;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import android.util.AttributeSet;
 import android.util.SparseArray;
 import android.view.View;
@@ -34,9 +34,10 @@ import java.util.ArrayList;
  * @Author: AriesHoo on 2018/11/30 11:22
  * @E-Mail: AriesHoo@126.com
  * @Function:
- * @Description: 1、2018年11月30日11:18:41 修改原库 https://github.com/H07000223/FlycoTabLayout 选中粗体当初始化选中第一项不生效BUG
+ * @Description: 1、2018-11-30 11:18:41 修改原库 https://github.com/H07000223/FlycoTabLayout 选中粗体当初始化选中第一项不生效BUG
  * * * {@link #updateTabStyles()}
  * 2、2018-12-3 13:03:31 将xml属性解析及设置移植到代理类{@link TabSegmentDelegate}
+ * 3、2018-12-13 09:40:51 新增选中文字字号设置 textSelectSize
  */
 public class SegmentTabLayout extends FrameLayout implements ValueAnimator.AnimatorUpdateListener, ITabLayout {
     private TabSegmentDelegate mDelegate;
@@ -183,7 +184,7 @@ public class SegmentTabLayout extends FrameLayout implements ValueAnimator.Anima
             tabView.setPadding((int) getDelegate().getTabPadding(), 0, (int) getDelegate().getTabPadding(), 0);
             TextView tv_tab_title = tabView.findViewById(R.id.tv_tab_title);
             tv_tab_title.setTextColor(i == mCurrentTab ? getDelegate().getTextSelectColor() : getDelegate().getTextUnSelectColor());
-            tv_tab_title.setTextSize(getDelegate().getTextSizeUnit(), getDelegate().getTextSize());
+            tv_tab_title.setTextSize(getDelegate().getTextSizeUnit(), mCurrentTab == i ? getDelegate().getTextSelectSize() : getDelegate().getTextSize());
             if (getDelegate().isTextAllCaps()) {
                 tv_tab_title.setText(tv_tab_title.getText().toString().toUpperCase());
             }
@@ -204,6 +205,7 @@ public class SegmentTabLayout extends FrameLayout implements ValueAnimator.Anima
             final boolean isSelect = i == position;
             TextView tab_title = tabView.findViewById(R.id.tv_tab_title);
             tab_title.setTextColor(isSelect ? getDelegate().getTextSelectColor() : getDelegate().getTextUnSelectColor());
+            tab_title.setTextSize(getDelegate().getTextSizeUnit(), isSelect ? getDelegate().getTextSelectSize() : getDelegate().getTextSize());
             if (getDelegate().getTextBold() == TextBold.SELECT) {
                 tab_title.getPaint().setFakeBoldText(isSelect);
             }

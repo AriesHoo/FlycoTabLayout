@@ -9,12 +9,12 @@ import android.graphics.Rect;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 import android.util.AttributeSet;
 import android.util.SparseArray;
 import android.view.Gravity;
@@ -37,9 +37,10 @@ import java.util.Collections;
  * @Author: AriesHoo on 2018/11/30 11:18
  * @E-Mail: AriesHoo@126.com
  * @Function: 滑动TabLayout, 对于ViewPager的依赖性强
- * @Description: 1、2018年11月30日11:18:41 修改原库 https://github.com/H07000223/FlycoTabLayout 选中粗体当初始化选中第一项不生效BUG
+ * @Description: 1、2018-11-30 11:18:41 修改原库 https://github.com/H07000223/FlycoTabLayout 选中粗体当初始化选中第一项不生效BUG
  * {@link #updateTabStyles()}
  * 2、2018-12-4 14:12:34 新增部分设置方法返回值方便链式调用;删除原库相应xml属性 set/get方法
+ * 3、2018-12-13 09:40:51 新增选中文字字号设置 textSelectSize
  */
 public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.OnPageChangeListener, ITabLayout {
     private TabSlidingDelegate mDelegate;
@@ -252,7 +253,7 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
             TextView tv_tab_title = v.findViewById(R.id.tv_tab_title);
             if (tv_tab_title != null) {
                 tv_tab_title.setTextColor(i == mCurrentTab ? getDelegate().getTextSelectColor() : getDelegate().getTextUnSelectColor());
-                tv_tab_title.setTextSize(getDelegate().getTextSizeUnit(), getDelegate().getTextSize());
+                tv_tab_title.setTextSize(getDelegate().getTextSizeUnit(), mCurrentTab == i ? getDelegate().getTextSelectSize() : getDelegate().getTextSize());
                 tv_tab_title.setPadding((int) getDelegate().getTabPadding(), 0, (int) getDelegate().getTabPadding(), 0);
                 if (getDelegate().isTextAllCaps()) {
                     tv_tab_title.setText(tv_tab_title.getText().toString().toUpperCase());
@@ -327,6 +328,7 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
 
             if (tab_title != null) {
                 tab_title.setTextColor(isSelect ? getDelegate().getTextSelectColor() : getDelegate().getTextUnSelectColor());
+                tab_title.setTextSize(getDelegate().getTextSizeUnit(), isSelect ? getDelegate().getTextSelectSize() : getDelegate().getTextSize());
                 if (getDelegate().getTextBold() == com.aries.ui.view.tab.TextBold.SELECT) {
                     tab_title.getPaint().setFakeBoldText(isSelect);
                 }

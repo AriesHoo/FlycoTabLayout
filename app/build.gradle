@@ -20,7 +20,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:'.concat(ext.supportVersion)
-//    implementation 'com.aries.ui.view.tab:FlycoTabLayout_Lib:2.1.2@aar'
+    implementation 'androidx.appcompat:appcompat:'.concat(ext.supportVersion)
     implementation project(':lib')
 }

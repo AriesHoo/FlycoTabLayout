@@ -1,6 +1,6 @@
 package com.aries.ui.view.tab.listener;
 
-import android.support.annotation.DrawableRes;
+import androidx.annotation.DrawableRes;
 
 /**
  * @Author: AriesHoo on 2018/12/3 13:07

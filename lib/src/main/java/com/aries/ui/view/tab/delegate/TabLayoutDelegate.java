@@ -16,7 +16,7 @@ import com.aries.ui.view.tab.listener.ITabLayout;
  * @Author: AriesHoo on 2018/11/30 15:55
  * @E-Mail: AriesHoo@126.com
  * @Function: TabLayout属性代理类
- * @Description:
+ * @Description: 1、2018-12-13 09:40:01 新增选中文字字号设置 textSelectSize
  */
 public class TabLayoutDelegate<T extends TabLayoutDelegate> {
 
@@ -50,6 +50,7 @@ public class TabLayoutDelegate<T extends TabLayoutDelegate> {
      */
     protected int mTextSizeUnit = TypedValue.COMPLEX_UNIT_PX;
     protected float mTextSize;
+    protected float mTextSelectSize;
     protected int mTextSelectColor;
     protected int mTextUnSelectColor;
     protected int mTextBold;
@@ -74,6 +75,7 @@ public class TabLayoutDelegate<T extends TabLayoutDelegate> {
         mDividerPadding = mTypedArray.getDimension(R.styleable.TabLayout_tl_divider_padding, dp2px(12));
 
         mTextSize = mTypedArray.getDimensionPixelSize(R.styleable.TabLayout_tl_textSize, dp2px(14));
+        mTextSelectSize = mTypedArray.getDimensionPixelSize(R.styleable.TabLayout_tl_textSelectSize, 0);
         mTextSelectColor = mTypedArray.getColor(R.styleable.TabLayout_tl_textSelectColor, Color.parseColor("#ffffff"));
         mTextUnSelectColor = mTypedArray.getColor(R.styleable.TabLayout_tl_textUnSelectColor, Color.parseColor("#AAffffff"));
         mTextBold = mTypedArray.getInt(R.styleable.TabLayout_tl_textBold, TextBold.NONE);
@@ -82,6 +84,8 @@ public class TabLayoutDelegate<T extends TabLayoutDelegate> {
         mTabSpaceEqual = mTypedArray.getBoolean(R.styleable.TabLayout_tl_tab_space_equal, true);
         mTabWidth = mTypedArray.getDimension(R.styleable.TabLayout_tl_tab_width, dp2px(-1));
         mTabPadding = mTypedArray.getDimension(R.styleable.TabLayout_tl_tab_padding, mTabSpaceEqual || mTabWidth > 0 ? dp2px(0) : dp2px(10));
+
+        mTextSelectSize = mTextSelectSize == 0 ? mTextSize : mTextSelectSize;
     }
 
     protected T back() {
@@ -175,7 +179,21 @@ public class TabLayoutDelegate<T extends TabLayoutDelegate> {
      * @return
      */
     public T setTextSize(float textSize) {
-        return setTextSize(TypedValue.COMPLEX_UNIT_DIP, textSize);
+        return setTextSize(mTextSizeUnit, textSize);
+    }
+
+    public T setTextSelectSize(int textSizeUnit, float textSize) {
+        this.mTextSelectSize = textSize;
+        this.mTextSizeUnit = textSizeUnit;
+        return back(true);
+    }
+
+    /**
+     * @param textSize
+     * @return
+     */
+    public T setTextSelectSize(float textSize) {
+        return setTextSelectSize(mTextSizeUnit, textSize);
     }
 
     public T setTextSelectColor(int textSelectColor) {
@@ -273,6 +291,10 @@ public class TabLayoutDelegate<T extends TabLayoutDelegate> {
 
     public int getTextSizeUnit() {
         return mTextSizeUnit;
+    }
+
+    public float getTextSelectSize() {
+        return mTextSelectSize;
     }
 
     public float getTextSize() {

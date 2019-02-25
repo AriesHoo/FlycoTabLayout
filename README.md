@@ -27,9 +27,9 @@
 
 ```groovy
 dependencies{
-    compile 'com.android.support:support-v4:28.0.0'
+    implementation 'androidx.appcompat:appcompat:'.concat(ext.supportVersion)
     implementation 'com.github.AriesHoo:TabLayout:${LATEST_VERSION}'
-    //implementation 'com.github.AriesHoo:TabLayout:1.0.1'
+    //implementation 'com.github.AriesHoo:TabLayout:1.0.2'
 }
 ```
 
@@ -60,6 +60,7 @@ dependencies{
 | tl_tab_width |dimension| 设置tab固定大小
 | ~~tl_textsize~~ |~~dimension~~| ~~设置字体大小~~
 | tl_textSize |dimension| 设置字体大小
+| tl_textSelectSize |dimension| 设置选中字体大小
 | tl_textSelectColor |color| 设置字体选中颜色
 | ~~tl_textUnselectColor~~ |~~color~~| ~~设置字体未选中颜色~~
 | tl_textUnSelectColor |color| 设置字体未选中颜色
@@ -100,6 +101,11 @@ dependencies{
  
  ## 重大更新日志 其它版本参看[Release](https://github.com/AriesHoo/TabLayout/releases)
  
+ * 1.0.2 更新
+ 
+   * 升级:upgrade androidx
+   * 新增:新增属性tl_textSelectSize 以设置选中字体大小
+   
  * 1.0.1 更新
  
    * 优化:将CommonTabLayout及SlidingTabLayout共有属性初始值进行调整;SegmentLayout初始属性进行调整

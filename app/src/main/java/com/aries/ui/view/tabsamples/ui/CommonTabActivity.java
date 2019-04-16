@@ -23,13 +23,19 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+/**
+ * @Author: AriesHoo on 2019/4/16 17:47
+ * @E-Mail: AriesHoo@126.com
+ * @Function: {@link CommonTabLayout}示例
+ * @Description:
+ */
 public class CommonTabActivity extends AppCompatActivity {
     private Context mContext = this;
     private ArrayList<Fragment> mFragments = new ArrayList<>();
     private ArrayList<Fragment> mFragments2 = new ArrayList<>();
 
     private String[] mTitles = {"首页", "消息", "联系人", "更多"};
-    private int[] mIconUnselectIds = {
+    private int[] mIconUnSelectIds = {
             R.mipmap.tab_home_unselect, R.mipmap.tab_speech_unselect,
             R.mipmap.tab_contact_unselect, R.mipmap.tab_more_unselect};
     private int[] mIconSelectIds = {
@@ -59,7 +65,7 @@ public class CommonTabActivity extends AppCompatActivity {
 
 
         for (int i = 0; i < mTitles.length; i++) {
-            mTabEntities.add(new TabEntity(mTitles[i], mIconSelectIds[i], mIconUnselectIds[i]));
+            mTabEntities.add(new TabEntity(mTitles[i], mIconSelectIds[i], mIconUnSelectIds[i]));
         }
 
         mDecorView = getWindow().getDecorView();

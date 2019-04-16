@@ -3,11 +3,6 @@ package com.aries.ui.view.tabsamples.ui;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
@@ -19,6 +14,18 @@ import com.aries.ui.view.tabsamples.utils.ViewFindUtils;
 
 import java.util.ArrayList;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
+/**
+ * @Author: AriesHoo on 2019/4/16 17:49
+ * @E-Mail: AriesHoo@126.com
+ * @Function: {@link SlidingTabLayout}示例
+ * @Description:
+ */
 public class SlidingTabActivity extends AppCompatActivity implements OnTabSelectListener {
     private Context mContext = this;
     private ArrayList<Fragment> mFragments = new ArrayList<>();

@@ -4,13 +4,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.aries.ui.view.tabsamples.adapter.SimpleHomeAdapter;
 
+import androidx.appcompat.app.AppCompatActivity;
+/**
+ * @Author: AriesHoo on 2019/4/16 17:49
+ * @E-Mail: AriesHoo@126.com
+ * @Function: 示例主页
+ * @Description:
+ */
 public class SimpleHomeActivity extends AppCompatActivity {
     private Context mContext = this;
     private final String[] mItems = {"SlidingTabLayout", "CommonTabLayout", "SegmentTabLayout"};

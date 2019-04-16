@@ -2,11 +2,6 @@ package com.aries.ui.view.tabsamples.ui;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 
 import com.aries.ui.view.tab.SegmentTabLayout;
@@ -17,6 +12,18 @@ import com.aries.ui.view.tabsamples.utils.ViewFindUtils;
 
 import java.util.ArrayList;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
+/**
+ * @Author: AriesHoo on 2019/4/16 17:47
+ * @E-Mail: AriesHoo@126.com
+ * @Function: {@link SegmentTabLayout}示例
+ * @Description:
+ */
 public class SegmentTabActivity extends AppCompatActivity {
     private ArrayList<Fragment> mFragments = new ArrayList<>();
     private ArrayList<Fragment> mFragments2 = new ArrayList<>();

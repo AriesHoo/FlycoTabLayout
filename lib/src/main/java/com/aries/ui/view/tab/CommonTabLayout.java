@@ -241,7 +241,7 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
             final boolean isSelect = i == position;
             TextView tab_title = tabView.findViewById(R.id.tv_tab_title);
             tab_title.setTextColor(isSelect ? getDelegate().getTextSelectColor() : getDelegate().getTextUnSelectColor());
-            tab_title.setTextSize(getDelegate().getTextSizeUnit(), isSelect? getDelegate().getTextSelectSize() : getDelegate().getTextSize());
+            tab_title.setTextSize(getDelegate().getTextSizeUnit(), isSelect ? getDelegate().getTextSelectSize() : getDelegate().getTextSize());
             ImageView iv_tab_icon = tabView.findViewById(R.id.iv_tab_icon);
             CustomTabEntity tabEntity = mTabEntity.get(i);
             iv_tab_icon.setImageResource(isSelect ? tabEntity.getTabSelectedIcon() : tabEntity.getTabUnselectedIcon());
@@ -409,13 +409,13 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
         mLastTab = this.mCurrentTab;
         this.mCurrentTab = currentTab;
         updateTabSelection(currentTab);
-        if (mFragmentChangeManager != null) {
-            mFragmentChangeManager.setFragments(currentTab);
-        }
         if (getDelegate().isIndicatorAnimEnable()) {
             calcOffset();
         } else {
             invalidate();
+        }
+        if (mFragmentChangeManager != null) {
+            mFragmentChangeManager.setFragments(currentTab);
         }
         return this;
     }

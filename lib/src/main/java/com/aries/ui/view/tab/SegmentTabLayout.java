@@ -10,8 +10,10 @@ import android.graphics.Rect;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Parcelable;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+
 import android.util.AttributeSet;
 import android.util.SparseArray;
 import android.view.View;
@@ -368,13 +370,13 @@ public class SegmentTabLayout extends FrameLayout implements ValueAnimator.Anima
         mLastTab = this.mCurrentTab;
         this.mCurrentTab = currentTab;
         updateTabSelection(currentTab);
-        if (mFragmentChangeManager != null) {
-            mFragmentChangeManager.setFragments(currentTab);
-        }
         if (getDelegate().isIndicatorAnimEnable()) {
             calcOffset();
         } else {
             invalidate();
+        }
+        if (mFragmentChangeManager != null) {
+            mFragmentChangeManager.setFragments(currentTab);
         }
         return this;
     }

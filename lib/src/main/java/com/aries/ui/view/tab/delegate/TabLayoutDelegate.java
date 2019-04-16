@@ -17,6 +17,8 @@ import com.aries.ui.view.tab.listener.ITabLayout;
  * @E-Mail: AriesHoo@126.com
  * @Function: TabLayout属性代理类
  * @Description: 1、2018-12-13 09:40:01 新增选中文字字号设置 textSelectSize
+ * 2、2019-4-16 17:35:13 新增部分漏掉set方法{@link #setIndicatorMarginLeft(int)}{@link #setIndicatorMarginTop(int)}{@link #setIndicatorMarginRight(int)}{@link #setIndicatorMarginBottom(int)}
+ * {@link #setTabPadding(float)}{@link #setTabSpaceEqual(boolean)}{@link #setTabWidth(float)}
  */
 public class TabLayoutDelegate<T extends TabLayoutDelegate> {
 
@@ -55,6 +57,7 @@ public class TabLayoutDelegate<T extends TabLayoutDelegate> {
     protected int mTextUnSelectColor;
     protected int mTextBold;
     protected boolean mTextAllCaps;
+
 
     public TabLayoutDelegate(View view, AttributeSet attrs, ITabLayout iTabLayout) {
         mITabLayout = iTabLayout;
@@ -226,6 +229,37 @@ public class TabLayoutDelegate<T extends TabLayoutDelegate> {
     public T setTextAllCaps(boolean textAllCaps) {
         this.mTextAllCaps = textAllCaps;
         return back(true);
+    }
+
+    public T setIndicatorMarginLeft(int indicatorMarginLeft) {
+        return setIndicatorMargin(indicatorMarginLeft, mIndicatorMarginTop, mIndicatorMarginRight, mIndicatorMarginBottom);
+    }
+
+    public T setIndicatorMarginTop(int indicatorMarginTop) {
+        return setIndicatorMargin(mIndicatorMarginLeft, indicatorMarginTop, mIndicatorMarginRight, mIndicatorMarginBottom);
+    }
+
+    public T setIndicatorMarginRight(int indicatorMarginRight) {
+        return setIndicatorMargin(mIndicatorMarginLeft, mIndicatorMarginTop, indicatorMarginRight, mIndicatorMarginBottom);
+    }
+
+    public T setIndicatorMarginBottom(int indicatorMarginBottom) {
+        return setIndicatorMargin(mIndicatorMarginLeft, mIndicatorMarginTop, mIndicatorMarginRight, indicatorMarginBottom);
+    }
+
+    public T setTabPadding(float tabPadding) {
+        mTabPadding = tabPadding;
+        return back();
+    }
+
+    public T setTabSpaceEqual(boolean tabSpaceEqual) {
+        mTabSpaceEqual = tabSpaceEqual;
+        return back();
+    }
+
+    public T setTabWidth(float tabWidth) {
+        mTabWidth = tabWidth;
+        return back();
     }
 
     public int getIndicatorColor() {

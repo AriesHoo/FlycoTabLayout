@@ -92,7 +92,7 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
         mTabsContainer = new LinearLayout(context);
         addView(mTabsContainer);
         //get layout_height
-        String height = attrs.getAttributeValue("http://schemas.android.com/apk/res/android", "layout_height");
+        String height = attrs == null ? "" : attrs.getAttributeValue("http://schemas.android.com/apk/res/android", "layout_height");
 
         //create ViewPager
         if (height.equals(ViewGroup.LayoutParams.MATCH_PARENT + "")) {

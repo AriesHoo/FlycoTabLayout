@@ -9,12 +9,6 @@ import android.graphics.Rect;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Parcelable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 import android.util.AttributeSet;
 import android.util.SparseArray;
 import android.view.Gravity;
@@ -32,6 +26,13 @@ import com.aries.ui.view.tab.widget.MsgView;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 /**
  * @Author: AriesHoo on 2018/11/30 11:18
@@ -96,7 +97,7 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
         addView(mTabsContainer);
 
         //get layout_height
-        String height = attrs.getAttributeValue("http://schemas.android.com/apk/res/android", "layout_height");
+        String height = attrs == null ? "" : attrs.getAttributeValue("http://schemas.android.com/apk/res/android", "layout_height");
 
         if (height.equals(ViewGroup.LayoutParams.MATCH_PARENT + "")) {
         } else if (height.equals(ViewGroup.LayoutParams.WRAP_CONTENT + "")) {

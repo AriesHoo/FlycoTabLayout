@@ -92,5 +92,11 @@
             tl:tl_indicator_margin_right="2dp"
             tl:tl_indicator_margin_top="2dp"
             tl:tl_tab_space_equal="true"/>
+
+        <Button
+            android:id="@+id/btn_eventTab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="EventBus"/>
     </LinearLayout>
 </ScrollView>

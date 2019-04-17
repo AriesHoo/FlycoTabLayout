@@ -10,11 +10,8 @@ import android.graphics.Rect;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Parcelable;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +28,9 @@ import com.aries.ui.view.tab.utils.UnreadMsgUtils;
 import com.aries.ui.view.tab.widget.MsgView;
 
 import java.util.ArrayList;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 /**
  * @Author: AriesHoo on 2018/11/30 11:22
@@ -156,16 +156,7 @@ public class SegmentTabLayout extends FrameLayout implements ValueAnimator.Anima
             @Override
             public void onClick(View v) {
                 int position = (Integer) v.getTag();
-                if (mCurrentTab != position) {
-                    setCurrentTab(position);
-                    if (mListener != null) {
-                        mListener.onTabSelect(position);
-                    }
-                } else {
-                    if (mListener != null) {
-                        mListener.onTabReselect(position);
-                    }
-                }
+                setCurrentTab(position);
             }
         });
 
@@ -367,16 +358,25 @@ public class SegmentTabLayout extends FrameLayout implements ValueAnimator.Anima
      * @return
      */
     public SegmentTabLayout setCurrentTab(int currentTab) {
-        mLastTab = this.mCurrentTab;
-        this.mCurrentTab = currentTab;
-        updateTabSelection(currentTab);
-        if (getDelegate().isIndicatorAnimEnable()) {
-            calcOffset();
+        if (mCurrentTab != currentTab) {
+            mLastTab = this.mCurrentTab;
+            this.mCurrentTab = currentTab;
+            updateTabSelection(currentTab);
+            if (getDelegate().isIndicatorAnimEnable()) {
+                calcOffset();
+            } else {
+                invalidate();
+            }
+            if (mFragmentChangeManager != null) {
+                mFragmentChangeManager.setFragments(currentTab);
+            }
+            if (mListener != null) {
+                mListener.onTabSelect(currentTab);
+            }
         } else {
-            invalidate();
-        }
-        if (mFragmentChangeManager != null) {
-            mFragmentChangeManager.setFragments(currentTab);
+            if (mListener != null) {
+                mListener.onTabReselect(currentTab);
+            }
         }
         return this;
     }
@@ -507,6 +507,7 @@ public class SegmentTabLayout extends FrameLayout implements ValueAnimator.Anima
         Bundle bundle = new Bundle();
         bundle.putParcelable("instanceState", super.onSaveInstanceState());
         bundle.putInt("mCurrentTab", mCurrentTab);
+        Log.i("save0", "mCurrentTab:" + mCurrentTab);
         return bundle;
     }
 
@@ -514,7 +515,9 @@ public class SegmentTabLayout extends FrameLayout implements ValueAnimator.Anima
     protected void onRestoreInstanceState(Parcelable state) {
         if (state instanceof Bundle) {
             Bundle bundle = (Bundle) state;
+            Log.i("save1", "mCurrentTab:" + mCurrentTab);
             mCurrentTab = bundle.getInt("mCurrentTab");
+            Log.i("save2", "mCurrentTab:" + mCurrentTab);
             state = bundle.getParcelable("instanceState");
             if (mCurrentTab != 0 && mTabsContainer.getChildCount() > 0) {
                 //updateTabSelection(mCurrentTab); 原库恢复状态时未将Fragment选中CurrentTab

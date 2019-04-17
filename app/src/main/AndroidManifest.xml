@@ -28,7 +28,9 @@
         <activity
             android:name=".ui.SegmentTabActivity"
             android:screenOrientation="portrait"/>
-
+        <activity
+            android:name=".ui.EventBusActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

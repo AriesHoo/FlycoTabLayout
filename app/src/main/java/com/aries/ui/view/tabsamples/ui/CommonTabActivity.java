@@ -1,6 +1,7 @@
 package com.aries.ui.view.tabsamples.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -14,13 +15,16 @@ import com.aries.ui.view.tabsamples.R;
 import com.aries.ui.view.tabsamples.entity.TabEntity;
 import com.aries.ui.view.tabsamples.utils.ViewFindUtils;
 
+import org.simple.eventbus.Subscriber;
+import org.simple.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.Random;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 /**
@@ -29,7 +33,7 @@ import androidx.viewpager.widget.ViewPager;
  * @Function: {@link CommonTabLayout}示例
  * @Description:
  */
-public class CommonTabActivity extends AppCompatActivity {
+public class CommonTabActivity extends BaseActivity {
     private Context mContext = this;
     private ArrayList<Fragment> mFragments = new ArrayList<>();
     private ArrayList<Fragment> mFragments2 = new ArrayList<>();
@@ -144,6 +148,13 @@ public class CommonTabActivity extends AppCompatActivity {
         if (rtv_2_3 != null) {
             rtv_2_3.setBackgroundColor(Color.parseColor("#6D8FB0"));
         }
+
+        findViewById(R.id.btn_eventTab).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(CommonTabActivity.this, EventBusActivity.class));
+            }
+        });
     }
 
     Random mRandom = new Random();
@@ -209,5 +220,16 @@ public class CommonTabActivity extends AppCompatActivity {
     protected int dp2px(float dp) {
         final float scale = mContext.getResources().getDisplayMetrics().density;
         return (int) (dp * scale + 0.5f);
+    }
+
+    /**
+     * 主要演示 刷新上一页面tab时 Fragment 不同时切换问题{@link com.aries.ui.view.tab.utils.FragmentChangeManager#setFragments(int)}
+     * 原{@link FragmentTransaction#commit()}修改为{@link FragmentTransaction#commitAllowingStateLoss()}
+     *
+     * @param index
+     */
+    @Subscriber(mode = ThreadMode.MAIN, tag = "switchTab")
+    public void switchTab(final int index) {
+        mTabLayout_3.setCurrentTab(index == mTabLayout_3.getCurrentTab() ? 1 : index);
     }
 }

@@ -1,23 +1,33 @@
 package com.aries.ui.view.tabsamples.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.aries.ui.view.tab.IndicatorStyle;
 import com.aries.ui.view.tab.SlidingTabLayout;
+import com.aries.ui.view.tab.TextBold;
 import com.aries.ui.view.tab.listener.OnTabSelectListener;
 import com.aries.ui.view.tab.widget.MsgView;
 import com.aries.ui.view.tabsamples.R;
+import com.aries.ui.view.tabsamples.utils.SizeUtil;
 import com.aries.ui.view.tabsamples.utils.ViewFindUtils;
+
+import org.simple.eventbus.Subscriber;
+import org.simple.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 /**
@@ -26,7 +36,7 @@ import androidx.viewpager.widget.ViewPager;
  * @Function: {@link SlidingTabLayout}示例
  * @Description:
  */
-public class SlidingTabActivity extends AppCompatActivity implements OnTabSelectListener {
+public class SlidingTabActivity extends BaseActivity implements OnTabSelectListener {
     private Context mContext = this;
     private ArrayList<Fragment> mFragments = new ArrayList<>();
     private final String[] mTitles = {
@@ -34,6 +44,7 @@ public class SlidingTabActivity extends AppCompatActivity implements OnTabSelect
             , "前端", "后端", "设计", "工具资源"
     };
     private MyPagerAdapter mAdapter;
+    private SlidingTabLayout tabLayout_2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +64,7 @@ public class SlidingTabActivity extends AppCompatActivity implements OnTabSelect
         /** 默认 */
         SlidingTabLayout tabLayout_1 = ViewFindUtils.find(decorView, R.id.tl_1);
         /**自定义部分属性*/
-        SlidingTabLayout tabLayout_2 = ViewFindUtils.find(decorView, R.id.tl_2);
+        tabLayout_2 = ViewFindUtils.find(decorView, R.id.tl_2);
         /** 字体加粗,大写 */
         SlidingTabLayout tabLayout_3 = ViewFindUtils.find(decorView, R.id.tl_3);
         /** tab固定宽度 */
@@ -112,6 +123,40 @@ public class SlidingTabActivity extends AppCompatActivity implements OnTabSelect
 //                tabLayout_7.addNewTab("后端");
 //            }
 //        });
+        SlidingTabLayout slidingTabLayout = new SlidingTabLayout(mContext);
+        slidingTabLayout.getDelegate()
+                .setIndicatorColor(Color.BLUE)
+                .setIndicatorGravity(Gravity.BOTTOM)
+                .setIndicatorHeight(3f)
+                .setIndicatorStyle(IndicatorStyle.NORMAL)
+                .setIndicatorWidthEqualTitle(false)
+                .setTabPadding(6f)
+                .setTextBold(TextBold.SELECT)
+                .setTextSelectColor(Color.BLUE)
+                .setTextUnSelectColor(Color.parseColor("#99333333"))
+                .setTextSelectSize(TypedValue.COMPLEX_UNIT_DIP, 18f)
+                .setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16f);
+
+        ((ViewGroup) tabLayout_1.getParent()).addView(slidingTabLayout, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, SizeUtil.dp2px(48)));
+        slidingTabLayout.setViewPager(vp, mTitles);
+        slidingTabLayout.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelect(int position) {
+                Toast.makeText(mContext, "position:" + position, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onTabReselect(int position) {
+
+            }
+        });
+
+        findViewById(R.id.btn_eventTab).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SlidingTabActivity.this, EventBusActivity.class));
+            }
+        });
     }
 
     @Override
@@ -143,5 +188,16 @@ public class SlidingTabActivity extends AppCompatActivity implements OnTabSelect
         public Fragment getItem(int position) {
             return mFragments.get(position);
         }
+    }
+
+    /**
+     * 主要演示 刷新上一页面tab时 Fragment 不同时切换问题{@link com.aries.ui.view.tab.utils.FragmentChangeManager#setFragments(int)}
+     * 原{@link FragmentTransaction#commit()}修改为{@link FragmentTransaction#commitAllowingStateLoss()}
+     *
+     * @param index
+     */
+    @Subscriber(mode = ThreadMode.MAIN, tag = "switchTab")
+    public void switchTab(final int index) {
+        tabLayout_2.setCurrentTab(index == tabLayout_2.getCurrentTab() ? 1 : index);
     }
 }

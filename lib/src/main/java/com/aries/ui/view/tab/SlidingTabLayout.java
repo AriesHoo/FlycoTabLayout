@@ -185,7 +185,9 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
             CharSequence pageTitle = mTitles == null ? mViewPager.getAdapter().getPageTitle(i) : mTitles.get(i);
             addTab(i, pageTitle.toString(), tabView);
         }
-
+        if(mCurrentTab!=mViewPager.getCurrentItem()){
+            setCurrentTab(mViewPager.getCurrentItem());
+        }
         updateTabStyles();
     }
 
@@ -217,21 +219,7 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
             public void onClick(View v) {
                 int position = mTabsContainer.indexOfChild(v);
                 if (position != -1) {
-                    if (mViewPager.getCurrentItem() != position) {
-                        if (mSnapOnTabClick) {
-                            mViewPager.setCurrentItem(position, false);
-                        } else {
-                            mViewPager.setCurrentItem(position);
-                        }
-
-                        if (mListener != null) {
-                            mListener.onTabSelect(position);
-                        }
-                    } else {
-                        if (mListener != null) {
-                            mListener.onTabReselect(position);
-                        }
-                    }
+                    setCurrentTab(position);
                 }
             }
         });
@@ -330,8 +318,13 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
             if (tab_title != null) {
                 tab_title.setTextColor(isSelect ? getDelegate().getTextSelectColor() : getDelegate().getTextUnSelectColor());
                 tab_title.setTextSize(getDelegate().getTextSizeUnit(), isSelect ? getDelegate().getTextSelectSize() : getDelegate().getTextSize());
-                if (getDelegate().getTextBold() == com.aries.ui.view.tab.TextBold.SELECT) {
-                    tab_title.getPaint().setFakeBoldText(isSelect);
+                if (getDelegate().getTextBold() == TextBold.BOTH) {
+                    tab_title.getPaint().setFakeBoldText(true);
+                } else if (getDelegate().getTextBold() == TextBold.SELECT) {
+                    //增加-以修正原库第一次选中粗体不生效问题
+                    tab_title.getPaint().setFakeBoldText(mCurrentTab == i);
+                } else {
+                    tab_title.getPaint().setFakeBoldText(false);
                 }
             }
         }
@@ -454,9 +447,9 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
                 }
 
                 mIndicatorDrawable.setColor(getDelegate().getIndicatorColor());
-                mIndicatorDrawable.setBounds(paddingLeft + (int) getDelegate().getIndicatorMarginLeft() + mIndicatorRect.left,
-                        (int) getDelegate().getIndicatorMarginTop(), (int) (paddingLeft + mIndicatorRect.right - getDelegate().getIndicatorMarginRight()),
-                        (int) (getDelegate().getIndicatorMarginTop() + getDelegate().getIndicatorHeight()));
+                mIndicatorDrawable.setBounds(paddingLeft + getDelegate().getIndicatorMarginLeft() + mIndicatorRect.left,
+                        getDelegate().getIndicatorMarginTop(), (paddingLeft + mIndicatorRect.right - getDelegate().getIndicatorMarginRight()),
+                        (getDelegate().getIndicatorMarginTop() + getDelegate().getIndicatorHeight()));
                 mIndicatorDrawable.setCornerRadius(getDelegate().getIndicatorCornerRadius());
                 mIndicatorDrawable.draw(canvas);
             }
@@ -465,14 +458,14 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
                 mIndicatorDrawable.setColor(getDelegate().getIndicatorColor());
                 if (getDelegate().getIndicatorGravity() == Gravity.BOTTOM) {
                     mIndicatorDrawable.setBounds(paddingLeft + getDelegate().getIndicatorMarginLeft() + mIndicatorRect.left,
-                            height - (int) getDelegate().getIndicatorHeight() - getDelegate().getIndicatorMarginBottom(),
+                            height - getDelegate().getIndicatorHeight() - getDelegate().getIndicatorMarginBottom(),
                             paddingLeft + mIndicatorRect.right - getDelegate().getIndicatorMarginRight(),
-                            height - (int) getDelegate().getIndicatorMarginBottom());
+                            height - getDelegate().getIndicatorMarginBottom());
                 } else {
                     mIndicatorDrawable.setBounds(paddingLeft + getDelegate().getIndicatorMarginLeft() + mIndicatorRect.left,
                             getDelegate().getIndicatorMarginTop(),
                             paddingLeft + mIndicatorRect.right - getDelegate().getIndicatorMarginRight(),
-                            (int) getDelegate().getIndicatorHeight() + getDelegate().getIndicatorMarginTop());
+                            getDelegate().getIndicatorHeight() + getDelegate().getIndicatorMarginTop());
                 }
                 mIndicatorDrawable.setCornerRadius(getDelegate().getIndicatorCornerRadius());
                 mIndicatorDrawable.draw(canvas);
@@ -481,14 +474,21 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
     }
 
     public SlidingTabLayout setCurrentTab(int currentTab) {
-        this.mCurrentTab = currentTab;
-        mViewPager.setCurrentItem(currentTab);
-        return this;
+        return setCurrentTab(currentTab, false);
     }
 
     public SlidingTabLayout setCurrentTab(int currentTab, boolean smoothScroll) {
-        this.mCurrentTab = currentTab;
-        mViewPager.setCurrentItem(currentTab, smoothScroll);
+        if (getCurrentTab() != currentTab) {
+            this.mCurrentTab = currentTab;
+            mViewPager.setCurrentItem(currentTab, mSnapOnTabClick ? false : smoothScroll);
+            if (mListener != null) {
+                mListener.onTabSelect(currentTab);
+            }
+        } else {
+            if (mListener != null) {
+                mListener.onTabReselect(currentTab);
+            }
+        }
         return this;
     }
 

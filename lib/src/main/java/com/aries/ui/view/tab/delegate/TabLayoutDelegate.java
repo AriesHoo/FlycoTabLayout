@@ -29,16 +29,16 @@ public class TabLayoutDelegate<T extends TabLayoutDelegate> {
 
 
     protected int mIndicatorColor;
-    protected float mIndicatorHeight;
+    protected int mIndicatorHeight;
     protected float mIndicatorCornerRadius;
     protected int mIndicatorMarginLeft;
     protected int mIndicatorMarginTop;
     protected int mIndicatorMarginRight;
     protected int mIndicatorMarginBottom;
 
-    protected float mTabPadding;
+    protected int mTabPadding;
     protected boolean mTabSpaceEqual;
-    protected float mTabWidth;
+    protected int mTabWidth;
 
     /**
      * divider
@@ -66,7 +66,7 @@ public class TabLayoutDelegate<T extends TabLayoutDelegate> {
         mTypedArray = mContext.obtainStyledAttributes(attrs, R.styleable.TabLayout);
 
         mIndicatorColor = mTypedArray.getColor(R.styleable.TabLayout_tl_indicator_color, Color.parseColor("#4B6A87"));
-        mIndicatorHeight = mTypedArray.getDimension(R.styleable.TabLayout_tl_indicator_height, dp2px(4));
+        mIndicatorHeight = mTypedArray.getDimensionPixelSize(R.styleable.TabLayout_tl_indicator_height, dp2px(4));
         mIndicatorCornerRadius = mTypedArray.getDimension(R.styleable.TabLayout_tl_indicator_corner_radius, dp2px(0));
         mIndicatorMarginLeft = mTypedArray.getDimensionPixelSize(R.styleable.TabLayout_tl_indicator_margin_left, dp2px(0));
         mIndicatorMarginTop = mTypedArray.getDimensionPixelSize(R.styleable.TabLayout_tl_indicator_margin_top, dp2px(0));
@@ -85,8 +85,8 @@ public class TabLayoutDelegate<T extends TabLayoutDelegate> {
         mTextAllCaps = mTypedArray.getBoolean(R.styleable.TabLayout_tl_textAllCaps, false);
 
         mTabSpaceEqual = mTypedArray.getBoolean(R.styleable.TabLayout_tl_tab_space_equal, true);
-        mTabWidth = mTypedArray.getDimension(R.styleable.TabLayout_tl_tab_width, dp2px(-1));
-        mTabPadding = mTypedArray.getDimension(R.styleable.TabLayout_tl_tab_padding, mTabSpaceEqual || mTabWidth > 0 ? dp2px(0) : dp2px(10));
+        mTabWidth = mTypedArray.getDimensionPixelSize(R.styleable.TabLayout_tl_tab_width, dp2px(-1));
+        mTabPadding = mTypedArray.getDimensionPixelSize(R.styleable.TabLayout_tl_tab_padding, mTabSpaceEqual || mTabWidth > 0 ? dp2px(0) : dp2px(10));
 
         mTextSelectSize = mTextSelectSize == 0 ? mTextSize : mTextSelectSize;
     }
@@ -248,6 +248,10 @@ public class TabLayoutDelegate<T extends TabLayoutDelegate> {
     }
 
     public T setTabPadding(float tabPadding) {
+        return setTabPadding(dp2px(tabPadding));
+    }
+
+    public T setTabPadding(int tabPadding) {
         mTabPadding = tabPadding;
         return back();
     }
@@ -258,6 +262,10 @@ public class TabLayoutDelegate<T extends TabLayoutDelegate> {
     }
 
     public T setTabWidth(float tabWidth) {
+        return setTabWidth(dp2px(tabWidth));
+    }
+
+    public T setTabWidth(int tabWidth) {
         mTabWidth = tabWidth;
         return back();
     }
@@ -266,7 +274,7 @@ public class TabLayoutDelegate<T extends TabLayoutDelegate> {
         return mIndicatorColor;
     }
 
-    public float getIndicatorHeight() {
+    public int getIndicatorHeight() {
         return mIndicatorHeight;
     }
 
@@ -299,7 +307,7 @@ public class TabLayoutDelegate<T extends TabLayoutDelegate> {
         return mContext;
     }
 
-    public float getTabPadding() {
+    public int getTabPadding() {
         return mTabPadding;
     }
 
@@ -307,7 +315,7 @@ public class TabLayoutDelegate<T extends TabLayoutDelegate> {
         return mTabSpaceEqual;
     }
 
-    public float getTabWidth() {
+    public int getTabWidth() {
         return mTabWidth;
     }
 

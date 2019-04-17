@@ -1,8 +1,10 @@
 package com.aries.ui.view.tabsamples.ui;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.aries.ui.view.tab.SegmentTabLayout;
 import com.aries.ui.view.tab.listener.OnTabSelectListener;
@@ -10,12 +12,15 @@ import com.aries.ui.view.tab.widget.MsgView;
 import com.aries.ui.view.tabsamples.R;
 import com.aries.ui.view.tabsamples.utils.ViewFindUtils;
 
+import org.simple.eventbus.Subscriber;
+import org.simple.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 /**
@@ -24,7 +29,7 @@ import androidx.viewpager.widget.ViewPager;
  * @Function: {@link SegmentTabLayout}示例
  * @Description:
  */
-public class SegmentTabActivity extends AppCompatActivity {
+public class SegmentTabActivity extends BaseActivity {
     private ArrayList<Fragment> mFragments = new ArrayList<>();
     private ArrayList<Fragment> mFragments2 = new ArrayList<>();
 
@@ -33,6 +38,7 @@ public class SegmentTabActivity extends AppCompatActivity {
     private String[] mTitles_3 = {"首页", "消息", "联系人", "更多"};
     private View mDecorView;
     private SegmentTabLayout mTabLayout_3;
+    private SegmentTabLayout tabLayout_4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +58,7 @@ public class SegmentTabActivity extends AppCompatActivity {
         SegmentTabLayout tabLayout_1 = ViewFindUtils.find(mDecorView, R.id.tl_1);
         SegmentTabLayout tabLayout_2 = ViewFindUtils.find(mDecorView, R.id.tl_2);
         mTabLayout_3 = ViewFindUtils.find(mDecorView, R.id.tl_3);
-        SegmentTabLayout tabLayout_4 = ViewFindUtils.find(mDecorView, R.id.tl_4);
+        tabLayout_4 = ViewFindUtils.find(mDecorView, R.id.tl_4);
         SegmentTabLayout tabLayout_5 = ViewFindUtils.find(mDecorView, R.id.tl_5);
 
         tabLayout_1.setTabData(mTitles);
@@ -73,6 +79,8 @@ public class SegmentTabActivity extends AppCompatActivity {
         if (rtv_3_2 != null) {
             rtv_3_2.setBackgroundColor(Color.parseColor("#6D8FB0"));
         }
+
+        tabLayout_4.setCurrentTab(2);
     }
 
     private void tl_3() {
@@ -83,6 +91,7 @@ public class SegmentTabActivity extends AppCompatActivity {
         mTabLayout_3.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {
+                Toast.makeText(SegmentTabActivity.this, "position:" + position, Toast.LENGTH_SHORT).show();
                 vp_3.setCurrentItem(position);
             }
 
@@ -107,7 +116,14 @@ public class SegmentTabActivity extends AppCompatActivity {
 
             }
         });
-        vp_3.setCurrentItem(1);
+        mTabLayout_3.setCurrentTab(0);
+
+        findViewById(R.id.btn_eventTab).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SegmentTabActivity.this, EventBusActivity.class));
+            }
+        });
     }
 
     private class MyPagerAdapter extends FragmentPagerAdapter {
@@ -129,5 +145,16 @@ public class SegmentTabActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             return mFragments.get(position);
         }
+    }
+
+    /**
+     * 主要演示 刷新上一页面tab时 Fragment 不同时切换问题{@link com.aries.ui.view.tab.utils.FragmentChangeManager#setFragments(int)}
+     * 原{@link FragmentTransaction#commit()}修改为{@link FragmentTransaction#commitAllowingStateLoss()}
+     *
+     * @param index
+     */
+    @Subscriber(mode = ThreadMode.MAIN, tag = "switchTab")
+    public void switchTab(final int index) {
+        tabLayout_4.setCurrentTab(index == tabLayout_4.getCurrentTab() ? 1 : index);
     }
 }

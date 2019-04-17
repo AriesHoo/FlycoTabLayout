@@ -27,7 +27,7 @@ public class TabSegmentDelegate extends TabLayoutDelegate<TabSegmentDelegate> {
     public TabSegmentDelegate(View view, AttributeSet attrs, ITabLayout iTabLayout) {
         super(view, attrs, iTabLayout);
         mIndicatorColor = mTypedArray.getColor(R.styleable.TabLayout_tl_indicator_color, Color.parseColor("#222831"));
-        mIndicatorHeight = mTypedArray.getDimension(R.styleable.TabLayout_tl_indicator_height, -1);
+        mIndicatorHeight = mTypedArray.getDimensionPixelSize(R.styleable.TabLayout_tl_indicator_height, -1);
         mIndicatorCornerRadius = mTypedArray.getDimension(R.styleable.TabLayout_tl_indicator_corner_radius, -1);
         mIndicatorAnimEnable = mTypedArray.getBoolean(R.styleable.TabLayout_tl_indicator_anim_enable, false);
         mIndicatorBounceEnable = mTypedArray.getBoolean(R.styleable.TabLayout_tl_indicator_bounce_enable, true);

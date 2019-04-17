@@ -128,5 +128,11 @@
             tl:tl_indicator_margin_right="5dp"
             tl:tl_indicator_style="BLOCK"
             tl:tl_textSize="14sp"/>
+
+        <Button
+            android:id="@+id/btn_eventTab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="EventBus"/>
     </LinearLayout>
 </ScrollView>

@@ -18,14 +18,14 @@ import com.aries.ui.view.tab.listener.ITabLayout;
 public class TabCommonSlidingDelegate<T extends TabCommonSlidingDelegate> extends TabLayoutDelegate<T> {
 
     protected int mIndicatorStyle;
-    protected float mIndicatorWidth;
+    protected int mIndicatorWidth;
     protected int mIndicatorGravity;
 
     /**
      * underline
      */
     protected int mUnderlineColor;
-    protected float mUnderlineHeight;
+    protected int mUnderlineHeight;
     protected int mUnderlineGravity;
 
 
@@ -33,15 +33,15 @@ public class TabCommonSlidingDelegate<T extends TabCommonSlidingDelegate> extend
         super(view, attrs, iTabLayout);
         mIndicatorStyle = mTypedArray.getInt(R.styleable.TabLayout_tl_indicator_style, IndicatorStyle.NORMAL);
         mIndicatorColor = mTypedArray.getColor(R.styleable.TabLayout_tl_indicator_color, Color.parseColor(mIndicatorStyle == IndicatorStyle.BLOCK ? "#4B6A87" : "#ffffff"));
-        mIndicatorHeight = mTypedArray.getDimension(R.styleable.TabLayout_tl_indicator_height, dp2px(mIndicatorStyle == IndicatorStyle.TRIANGLE ? 4 : (mIndicatorStyle == IndicatorStyle.BLOCK ? -1 : 2)));
-        mIndicatorWidth = mTypedArray.getDimension(R.styleable.TabLayout_tl_indicator_width, dp2px(mIndicatorStyle == IndicatorStyle.TRIANGLE ? 10 : -1));
+        mIndicatorHeight = mTypedArray.getDimensionPixelSize(R.styleable.TabLayout_tl_indicator_height, dp2px(mIndicatorStyle == IndicatorStyle.TRIANGLE ? 4 : (mIndicatorStyle == IndicatorStyle.BLOCK ? -1 : 2)));
+        mIndicatorWidth = mTypedArray.getDimensionPixelSize(R.styleable.TabLayout_tl_indicator_width, dp2px(mIndicatorStyle == IndicatorStyle.TRIANGLE ? 10 : -1));
         mIndicatorMarginTop = mTypedArray.getDimensionPixelSize(R.styleable.TabLayout_tl_indicator_margin_top, dp2px(mIndicatorStyle == IndicatorStyle.BLOCK ? 7 : 0));
         mIndicatorMarginBottom = mTypedArray.getDimensionPixelSize(R.styleable.TabLayout_tl_indicator_margin_bottom, dp2px(mIndicatorStyle == IndicatorStyle.BLOCK ? 7 : 0));
         mIndicatorCornerRadius = mTypedArray.getDimensionPixelSize(R.styleable.TabLayout_tl_indicator_corner_radius, dp2px(mIndicatorStyle == IndicatorStyle.BLOCK ? -1 : 0));
         mIndicatorGravity = mTypedArray.getInt(R.styleable.TabLayout_tl_indicator_gravity, Gravity.BOTTOM);
 
         mUnderlineColor = mTypedArray.getColor(R.styleable.TabLayout_tl_underline_color, Color.parseColor("#ffffff"));
-        mUnderlineHeight = mTypedArray.getDimension(R.styleable.TabLayout_tl_underline_height, dp2px(0));
+        mUnderlineHeight = mTypedArray.getDimensionPixelSize(R.styleable.TabLayout_tl_underline_height, dp2px(0));
         mUnderlineGravity = mTypedArray.getInt(R.styleable.TabLayout_tl_underline_gravity, Gravity.BOTTOM);
     }
 
@@ -82,6 +82,10 @@ public class TabCommonSlidingDelegate<T extends TabCommonSlidingDelegate> extend
     }
 
     public T setUnderlineHeight(float underlineHeight) {
+        return setUnderlineHeight(dp2px(underlineHeight));
+    }
+
+    public T setUnderlineHeight(int underlineHeight) {
         this.mUnderlineHeight = underlineHeight;
         return back();
     }
@@ -95,7 +99,7 @@ public class TabCommonSlidingDelegate<T extends TabCommonSlidingDelegate> extend
         return mIndicatorStyle;
     }
 
-    public float getIndicatorWidth() {
+    public int getIndicatorWidth() {
         return mIndicatorWidth;
     }
 

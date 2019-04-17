@@ -169,16 +169,7 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
             @Override
             public void onClick(View v) {
                 int position = (Integer) v.getTag();
-                if (mCurrentTab != position) {
-                    setCurrentTab(position);
-                    if (mListener != null) {
-                        mListener.onTabSelect(position);
-                    }
-                } else {
-                    if (mListener != null) {
-                        mListener.onTabReselect(position);
-                    }
-                }
+                setCurrentTab(position);
             }
         });
 
@@ -406,16 +397,25 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
      * @return
      */
     public CommonTabLayout setCurrentTab(int currentTab) {
-        mLastTab = this.mCurrentTab;
-        this.mCurrentTab = currentTab;
-        updateTabSelection(currentTab);
-        if (getDelegate().isIndicatorAnimEnable()) {
-            calcOffset();
+        if (mCurrentTab != currentTab) {
+            mLastTab = this.mCurrentTab;
+            this.mCurrentTab = currentTab;
+            updateTabSelection(currentTab);
+            if (getDelegate().isIndicatorAnimEnable()) {
+                calcOffset();
+            } else {
+                invalidate();
+            }
+            if (mFragmentChangeManager != null) {
+                mFragmentChangeManager.setFragments(currentTab);
+            }
+            if (mListener != null) {
+                mListener.onTabSelect(currentTab);
+            }
         } else {
-            invalidate();
-        }
-        if (mFragmentChangeManager != null) {
-            mFragmentChangeManager.setFragments(currentTab);
+            if (mListener != null) {
+                mListener.onTabReselect(currentTab);
+            }
         }
         return this;
     }

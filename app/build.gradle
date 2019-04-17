@@ -22,4 +22,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:'.concat(ext.supportVersion)
     implementation project(':lib')
+    //页面事件交互
+    implementation 'org.simple:androideventbus:1.0.5.1'
 }

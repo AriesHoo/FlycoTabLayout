@@ -10,6 +10,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.Gravity;
 import android.view.View;
@@ -185,7 +186,7 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
             CharSequence pageTitle = mTitles == null ? mViewPager.getAdapter().getPageTitle(i) : mTitles.get(i);
             addTab(i, pageTitle.toString(), tabView);
         }
-        if(mCurrentTab!=mViewPager.getCurrentItem()){
+        if (mCurrentTab != mViewPager.getCurrentItem()) {
             setCurrentTab(mViewPager.getCurrentItem());
         }
         updateTabStyles();
@@ -243,13 +244,13 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
             if (tv_tab_title != null) {
                 tv_tab_title.setTextColor(i == mCurrentTab ? getDelegate().getTextSelectColor() : getDelegate().getTextUnSelectColor());
                 tv_tab_title.setTextSize(getDelegate().getTextSizeUnit(), mCurrentTab == i ? getDelegate().getTextSelectSize() : getDelegate().getTextSize());
-                tv_tab_title.setPadding((int) getDelegate().getTabPadding(), 0, (int) getDelegate().getTabPadding(), 0);
+                tv_tab_title.setPadding(getDelegate().getTabPadding(), 0, getDelegate().getTabPadding(), 0);
                 if (getDelegate().isTextAllCaps()) {
                     tv_tab_title.setText(tv_tab_title.getText().toString().toUpperCase());
                 }
-                if (getDelegate().getTextBold() == com.aries.ui.view.tab.TextBold.BOTH) {
+                if (getDelegate().getTextBold() == TextBold.BOTH) {
                     tv_tab_title.getPaint().setFakeBoldText(true);
-                } else if (getDelegate().getTextBold() == com.aries.ui.view.tab.TextBold.SELECT) {
+                } else if (getDelegate().getTextBold() == TextBold.SELECT) {
                     //增加-以修正原库第一次选中粗体不生效问题
                     tv_tab_title.getPaint().setFakeBoldText(mCurrentTab == i);
                 } else {
@@ -273,7 +274,9 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
 
     @Override
     public void onPageSelected(int position) {
+        setCurrentTab(position);
         updateTabSelection(position);
+        Log.e("onPageSelected", "position:" + position);
     }
 
     @Override
@@ -310,6 +313,7 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
     }
 
     private void updateTabSelection(int position) {
+        Log.e("updateTabSelection", "position:" + position);
         for (int i = 0; i < mTabCount; ++i) {
             View tabView = mTabsContainer.getChildAt(i);
             final boolean isSelect = i == position;

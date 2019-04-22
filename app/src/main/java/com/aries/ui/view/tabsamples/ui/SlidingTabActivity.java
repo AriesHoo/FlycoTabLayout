@@ -134,22 +134,12 @@ public class SlidingTabActivity extends BaseActivity implements OnTabSelectListe
                 .setTextBold(TextBold.SELECT)
                 .setTextSelectColor(Color.BLUE)
                 .setTextUnSelectColor(Color.parseColor("#99333333"))
-                .setTextSelectSize(TypedValue.COMPLEX_UNIT_DIP, 18f)
+                .setTextSelectSize(TypedValue.COMPLEX_UNIT_DIP, 16f)
                 .setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16f);
 
         ((ViewGroup) tabLayout_1.getParent()).addView(slidingTabLayout, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, SizeUtil.dp2px(48)));
         slidingTabLayout.setViewPager(vp, mTitles);
-        slidingTabLayout.setOnTabSelectListener(new OnTabSelectListener() {
-            @Override
-            public void onTabSelect(int position) {
-                Toast.makeText(mContext, "position:" + position, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onTabReselect(int position) {
-
-            }
-        });
+        slidingTabLayout.setOnTabSelectListener(this);
 
         findViewById(R.id.btn_eventTab).setOnClickListener(new View.OnClickListener() {
             @Override

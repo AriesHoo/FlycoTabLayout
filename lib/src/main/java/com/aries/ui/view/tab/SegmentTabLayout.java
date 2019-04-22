@@ -8,6 +8,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.AttributeSet;
@@ -313,8 +314,10 @@ public class SegmentTabLayout extends FrameLayout implements ValueAnimator.Anima
         }
 
         //draw rect
-        mRectDrawable.setColor(getDelegate().getBarColor());
-        mRectDrawable.setStroke(getDelegate().getBarStrokeWidth(), getDelegate().getBarStrokeColor());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mRectDrawable.setColor(getDelegate().getBarColor());
+            mRectDrawable.setStroke(getDelegate().getBarStrokeWidth(), getDelegate().getBarStrokeColor());
+        }
         mRectDrawable.setCornerRadius(getDelegate().getIndicatorCornerRadius());
         mRectDrawable.setBounds(getPaddingLeft(), getPaddingTop(),
                 getWidth() - getPaddingRight(), getHeight() - getPaddingBottom());

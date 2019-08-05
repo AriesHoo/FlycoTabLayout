@@ -19,6 +19,13 @@ import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
 import com.aries.ui.view.tab.delegate.TabSlidingDelegate;
 import com.aries.ui.view.tab.listener.ITabLayout;
 import com.aries.ui.view.tab.listener.OnTabSelectListener;
@@ -27,13 +34,6 @@ import com.aries.ui.view.tab.widget.MsgView;
 
 import java.util.ArrayList;
 import java.util.Collections;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 
 /**
  * @Author: AriesHoo on 2018/11/30 11:18
@@ -227,10 +227,10 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
 
         /** 每一个Tab的布局参数 */
         LinearLayout.LayoutParams lp_tab = getDelegate().isTabSpaceEqual() ?
-                new LinearLayout.LayoutParams(0, LayoutParams.MATCH_PARENT, 1.0f) :
+                new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT, 1.0f) :
                 new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
         if (getDelegate().getTabWidth() > 0) {
-            lp_tab = new LinearLayout.LayoutParams((int) getDelegate().getTabWidth(), LayoutParams.MATCH_PARENT);
+            lp_tab = new LinearLayout.LayoutParams(getDelegate().getTabWidth(), LayoutParams.MATCH_PARENT);
         }
 
         mTabsContainer.addView(tabView, position, lp_tab);

@@ -21,6 +21,9 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+
 import com.aries.ui.view.tab.delegate.TabSegmentDelegate;
 import com.aries.ui.view.tab.listener.ITabLayout;
 import com.aries.ui.view.tab.listener.OnTabSelectListener;
@@ -29,9 +32,6 @@ import com.aries.ui.view.tab.utils.UnreadMsgUtils;
 import com.aries.ui.view.tab.widget.MsgView;
 
 import java.util.ArrayList;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 
 /**
  * @Author: AriesHoo on 2018/11/30 11:22
@@ -163,10 +163,10 @@ public class SegmentTabLayout extends FrameLayout implements ValueAnimator.Anima
 
         /** 每一个Tab的布局参数 */
         LinearLayout.LayoutParams lp_tab = getDelegate().isTabSpaceEqual() ?
-                new LinearLayout.LayoutParams(0, LayoutParams.MATCH_PARENT, 1.0f) :
+                new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT, 1.0f) :
                 new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
         if (getDelegate().getTabWidth() > 0) {
-            lp_tab = new LinearLayout.LayoutParams((int) getDelegate().getTabWidth(), LayoutParams.MATCH_PARENT);
+            lp_tab = new LinearLayout.LayoutParams(getDelegate().getTabWidth(), LayoutParams.MATCH_PARENT);
         }
         mTabsContainer.addView(tabView, position, lp_tab);
     }

@@ -10,6 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
+
 import com.aries.ui.view.tab.IndicatorStyle;
 import com.aries.ui.view.tab.SlidingTabLayout;
 import com.aries.ui.view.tab.TextBold;
@@ -23,12 +29,6 @@ import org.simple.eventbus.Subscriber;
 import org.simple.eventbus.ThreadMode;
 
 import java.util.ArrayList;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
 
 /**
  * @Author: AriesHoo on 2019/4/16 17:49
@@ -133,6 +133,7 @@ public class SlidingTabActivity extends BaseActivity implements OnTabSelectListe
                 .setTabPadding(6f)
                 .setTextBold(TextBold.SELECT)
                 .setTextSelectColor(Color.BLUE)
+                .setTabSpaceEqual(true)
                 .setTextUnSelectColor(Color.parseColor("#99333333"))
                 .setTextSelectSize(TypedValue.COMPLEX_UNIT_DIP, 16f)
                 .setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16f);
